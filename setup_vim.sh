@@ -14,7 +14,7 @@ printf "Plugin 'morhetz/gruvbox'\n" >> ~/.vimrc
 printf "call vundle#end()\n" >> ~/.vimrc
 vim +PluginInstall +qall
 
-printf "set term=screen-256color\nset background=dark\ncolorscheme gruvbox" >> ~/.vimrc
+printf "set term=xterm-256color\nset background=dark\ncolorscheme gruvbox" >> ~/.vimrc
 
 echo "~/.vim/bundle/gruvbox/gruvbox_256palette.sh" >> ~/.bash_profile
 
