@@ -1,12 +1,10 @@
 filetype plugin indent on
 set tabstop=4
-set mouse=a
 set shiftwidth=4
 set expandtab
-set bs=1
 set autoindent
 set smartindent
-set clipboard=unnamed
+set clipboard=unnamedplus
 
 "tab formatting
 set list
@@ -43,7 +41,7 @@ set fo-=t
 highlight ColorColumn ctermfg=133
 
 filetype off
-syntax on
+syntax enable
 
 set nobackup
 set nowritebackup
