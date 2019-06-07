@@ -6,6 +6,9 @@ set autoindent
 set smartindent
 set clipboard=unnamedplus
 
+" abbreviations
+abbr _sh #!/bin/bash
+
 "tab formatting
 set list
 
