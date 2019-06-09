@@ -5,9 +5,11 @@ set expandtab
 set autoindent
 set smartindent
 set clipboard=unnamedplus
+set history=200
 
 " abbreviations
 abbr _sh #!/bin/bash
+abbr _py #!/usr/sbin/python3
 
 "tab formatting
 set list
@@ -55,3 +57,5 @@ noremap <Leader>f :Explore<CR>
 
 " avoid Esc key
 imap jj <Esc>
+
+
