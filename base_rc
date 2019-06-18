@@ -20,6 +20,7 @@ set list
 
 "set listchars=tab:\|\<Space>
 set listchars=tab:>-,space:.,eol:$     " > is shown at the beginning, - throughout
+
 " Set <Leader> key
 let mapleader=","
 
@@ -75,6 +76,9 @@ map <c-LEFT> <c-w><
 map <c-RIGHT> <c-w>>
 
 " Autocomplete
+
+"toggle listchar display
+ noremap <leader>d :set invlist<CR>
 
 " Show line numbers and length
 set ruler
