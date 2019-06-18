@@ -1,6 +1,7 @@
 #!/bin/bash
 mkdir -p ~/.vim/bundle
-git clone git@github.com:VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+#git clone git@github.com:VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 cat base_rc > ~/.vimrc
 printf "set nocompatible\nset rtp+=~/.vim/bundle/Vundle.vim\ncall vundle#begin()\nPlugin 'VundleVim/Vundle.vim'\nPlugin 'rstacruz/sparkup', {'rtp': 'vim'}\n" >> ~/.vimrc

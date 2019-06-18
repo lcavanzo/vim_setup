@@ -1,0 +1,355 @@
+<C-r> :: redo
+zz :: redraw the screen with the current line in the middle of the window
+<C-o> :: insert normal mode
+<C-v> + {code} :: insert characters using it's character code i.e 065 == A
+<C-v>u{code} :: for unicode i.e <C-v>u00bf == ¿
+ga == obtain character's info
+yt, :: copy until ','
+
+<C-v>{123} Insert character by decimal code
+<C-v>u{1234} Insert character by hexadecimal code
+<C-v>{nondigit} Insert nondigit literally
+<C-k>{char1}{char2} Insert character represented by {char1}{char2} digraph
+
+c Change
+d Delete
+y Yank into register
+g~ Swap case
+gu Make lowercase
+gU Make uppercase
+> Shift right
+< Shift left
+= Autoindent
+! Filter {motion} lines through an external program
+
+v Enable character-wise Visual mode
+V Enable line-wise Visual mode
+o Go to other end of highlighted text
+<C-v> Enable block-wise Visual mode
+gv Reselect the last visual selection
+
+
+f{char} :: to jump to a character on the current line and then repeat or reverse the jump with the ; and , commands,
+R :: change to replace mode
+gR :: change to virtual replace
+vi - <C-g> :: change to select mode
+gUit :: upper all inside tags
+
+Ex commands
+:[range]delete [x] Delete specified lines [into register x]
+:[range]yank [x] Yank specified lines [into register x]
+:[line]put [x] Put the text from register x after the specified line
+:[range]copy {address} Copy the specified lines to below the line specified by {address}
+:[range]move {address} Move the specified lines to below the line specified by {address}
+:[range]join Join the specified lines
+:[range]normal {commands} Execute Normal mode {commands} on each speci- fied line
+:[range]substitute/{pat- Replace occurrences of {pattern} with {string} on each specified line tern}/{string}/[flags]
+:[range]global/{pattern}/[cmd]
+Execute the Ex command [cmd] on all specified
+lines where the {pattern} matches
+
+open more than 1 file in vim, inside vim put
+:args {directory}/**
+
+## ex commands tricks
+:print :: print the current or range of lines
+:<number> :: go to that line
+:$ :: go to the final line in the file
+:<number>p :: print than line and move the cursor
+:%p :: print  all  lines
+:.,$p :: print from current cursor line until the final
+:1,5p :: print since 1 to line 5
+:/<html>/,/<\/html>/p :: print since opening tag until final tag
+:/<html>/+1,/<\/html>/-1p :: using offset, print after <html> line until before </html> tag
+:.,.+3p  :: print since our current line 
+
+## ex command :copy
+:6t. :: Copy line 6 to just below the current line
+:t6 :: Copy the current line to just below line 6
+:t. :: Duplicate the current line (similar to Normal mode yyp )
+:t$ :: Copy the current line to the end of the file
+:'<,'>t0 :: Copy the visually selected lines to the start of the file
+:'<,'>normal . :: For each line in the visual selection, execute the Normal mode . command
+:%normal A;  :: add ; at the end in  every line 
+:%normal i// :: add // in e:very line of the file
+:col<C-d> :: complete the word`
+q/ :: Open the command-line window with history of searches
+q: :: Open the command-line window with history of Ex commands
+ctrl-f :: Switch from Command-Line mode to the command-line window
+:2,$!sort -t',' -k2 :: sort a ccv for the second column
+
+:shell Start a shell (return to Vim by typing exit )
+:!{cmd} Execute {cmd} with the shell
+:read !{cmd} Execute {cmd} in the shell and insert its standard output
+below the cursor
+:[range]write !{cmd} Execute {cmd} in the shell with [range] lines as standard
+input
+:[range]!{filter} Filter the specified [range] through external program {filter}
+
+### FILES ###
+-The % symbol indicates which of the buffers is visible in the current window, while the # symbol represents the alternate file.
+<C-^> :: toggle between buffers
+:bdelete N1 N2 N3 :: delete buffer
+:N,M bdelete :: same up
+:bn :: go to next buffer
+:bp :: go to previous buffer
+:buffer <buffer-name>
+:args index.html app.js :: populate the buffer
+:args **/*.js :: use of globs
+:args `cat .chapters`  :: populate the argument list (inside the file are chapters, name )
+
+:w[rite] Write the contents of the buffer to disk
+:e[dit]! Read the file from disk back into the buffer (that is, revert changes)
+:qa[ll]! Close all windows, discarding changes without warning
+:wa[ll] Write all modified buffers to disk
+
+<C-w>s :: split horizontally
+<C-w>v :: split vertically
+
+:sp[lit] {file} Split the current window horizontally, loading {file} into the new window
+:vsp[lit] {file} Split the current window vertically, loading {file} into the new window
+
+
+:cl[ose] <C-w>c Close the active window
+:on[ly] <C-w>o Keep only the active window, closing all others
+
+:tabe[dit] {filename} Open {filename} in a new tab
+<C-w>T Move the current window into its own tab
+:tabc[lose] Close the current tab page and all of its windows
+:tabo[nly] Keep the active tab page, closing all others
+:tabn[ext] {N} {N}gt Switch to tab page number {N}
+:tabn[ext] gt Switch to the next tab page
+:tabp[revious] gT Switch to the previous tab page
+
+## edit files
+:edit <filename/path> :: open a file, we can use filename or absolute or relative path
+:pwd :: same as in terminal
+:edit % :: reference path where our buffer is
+:edit %:h :: reference to the path where pur buffer is, but without the filename 
+:set path+=app/** :: set path, is for use the :find command
+
+:edit . :e. Open file explorer for current working directory
+:Explore :E Open file explorer for the directory of the active buffer
+<C-g> :: check filename
+
+## create and save a file in a virtual directoy
+:edit madeup/dir/doesnotexist.yet :: create a new buffer in a virtual directory(not exist yet)
+:!mkdir -p %:h
+:write 
+
+:w !sudo tee % > /dev/null :: save with root privileges
+
+### Real and Display lines
+j Down one real line
+gj Down one display line
+k Up one real line
+gk Up one display line
+0 To first character of real line
+g0 To first character of display line
+^ To first nonblank character of real line
+g^ To first nonblank character of display line
+$ To end of real line
+g$ To end of display line
+
+## move word-wise
+w Forward to start of next word
+b Backward to start of current/previous word
+e Forward to end of current/next word
+ge Backward to end of previous word
+
+## character search 
+f{char} Forward to the next occurrence of {char}
+F{char} Backward to the previous occurrence of {char}
+t{char} Forward to the character before the next occurrence of {char}
+T{char} Backward to the character after the previous occurrence of {char}
+; Repeat the last character-search command
+, Reverse the last character-search command
+
+## Table 12—Delimited Text Objects
+a) or ab A pair of (parentheses)
+i) or ib Inside of (parentheses)
+a} or aB A pair of {braces}
+i} or iB Inside of {braces}
+a] A pair of [brackets]
+i] Inside of [brackets]
+a> A pair of <angle brackets>
+i> Inside of <angle brackets>
+a’ A pair of 'single quotes'
+i’ Inside of 'single quotes'
+a" A pair of "double quotes"
+i" Inside of "double quotes"
+a` A pair of `backticks`
+i` Inside of `backticks`
+at A pair of <xml>tags</xml>
+it Inside of <xml>tags</xml>
+
+##Bounded Text Objects
+Keystrokes Buffer Contents
+iw Current word
+aw Current word plus one space
+iW Current WORD
+aW Current WORD plus one space
+is Current sentence
+as Current sentence plus one space
+ip Current paragraph
+ap Current paragraph plus one blank line
+
+## Vim’s Automatic Marks
+`` Position before the last jump within current file
+`. Location of last change
+`^ Location of last insertion
+`[ Start of last change or yank
+`] End of last change or yank
+`< Start of last visual selection
+`> End of last visual selection
+
+## jumps
+[count]G Jump to line number
+//pattern <CR> / ?pattern <CR> / n / N Jump to next/previous occurrence of pattern
+% Jump to matching parenthesis
+( / ) Jump to start of previous/next sentence
+{ / } Jump to start of previous/next paragraph
+H / M / L Jump to top/middle/bottom of screen
+gf Jump to file name under the cursor
+<C-]> Jump to definition of keyword under the cursor
+’{mark} / `{mark} Jump to a mark
+
+gi :: If we leave Insert mode and then scroll around the document, we can quickly carry on where we left off
+F<space> :: places our cursor on the first of the two characters that we want to swap
+
+## Registers
+:reg "0 :: yank register
+"% Name of the current file
+"# Name of the alternate file
+". Last inserted text
+": Last Ex command
+"/ Last search pattern
+
+<C-r>{register} :: paste after the cursor
+
+## Macros
+@<register> :: execute the content of a specific register
+@@ :: repeats the macro that was invoked most recently.
+qq;.q :: record ';.' in the q register
+22@q :: execute the above command 22 times, if the executions fails, the macro stop running
+~ :: Capitalize a letter
+vU :: same as above
+:'<,'>normal @a :: first select a visual block, then execute the command :normal@<register>, this way execute macros in parallel
+q<capital letter(register)> :: append commands to the specific macro(register)
+:wall :: writte all
+:wnext :: writte the current buffer and change to the next buffer
+
+## numeric lines
+:let i=1 
+qa 
+I<C-r>= i <CR> ) 
+<Esc>
+:let i += 1 
+q 
+jVG 
+:'<,'>normal @a
+
+## Regex
+/\v#([0-9a-fA-F]{6}|[0-9a-fA-F]{3}) :: search hexadecimal
+\v#(\x{6}|\x{3}) :: same as above
+
+/\v<(\w+)\_s+\1> :: matches pair of duplicate words
+
+/\v<{word}> :: search a exact word i.e /\v<the>
+/{word} :: after put # or *, and make the same as above
+
+/word's \zs{word} :: search a word ; \z and \ze mark the start and the end of a pattern, 
+    /Practical \zsVim :: then only the word “Vim” would be highlighted. The word “Practical” would be excluded from the match, even though it is still part of the pattern.
+
+/{word}/e :: the cursor will be placed at the end of the matches
+
+#searches
+n Jump to next match, preserving direction and offset
+N Jump to previous match, preserving direction and offset
+/ <CR> Jump forward to next match of same pattern
+? <CR> Jump backward to previous match of same pattern if we execute a search without providing a pattern, Vim will just reuse the pattern from the previous search
+
+:%s/\v'(([^']|'\w)+)'/“\1”/g ::change ' for "
+
+## Susbsitute
+\r Insert a carriage return
+\t Insert a tab character
+\\ Insert a single backslash
+\1 Insert the first submatch
+\2 Insert the second submatch (and so on, up to \9 )
+\0 Insert the entire matched pattern
+& Insert the entire matched pattern
+~ Use {string} from the previous invocation of :substitute
+\={Vim script} Evaluate {Vim script} expression; use result as replacement {string}
+
+:%s/{word}/{word}/g :: change all ocurrences, is like sed
+:%s/content/copy/gc :: same as above but this time ask before change the word
+    y Substitute this match
+    n Skip this match
+    q Quit substituting
+    l “last”—Substitute this match, then quit
+    a “all”—Substitute this and any remaining matches
+    <C-e> Scroll the screen up
+    <C-y> Scroll the screen down
+
+
+gv :: select the last visual selection
+:'<,'>&& :: apply the substitute but act on the last selection
+
+/\v^([^,]*),([^,]*),([^,]*)$ :: change the order of the next text
+:%s//\3,\2,\1
+    last name,first name,email
+    neil,drew,drew@vimcasts.org
+    doe,john,john@example.com
+
+
+ \v\<\/?h\zs\d :: change the h1 tags in the next text
+ %s//\=submatch(0)-1/g
+     <h2>Heading number 1</h2>
+     <h3>Number 2 heading</h3>
+     <h4>Another heading</h4>v
+
+
+:sort :: sort the lines, it's useful if we previously select text with visual mode
+g/{/ .+1,/}/-1 sort  :: Alphabetize or sort all lines inside curly braces
+:g/{/ .+1,/}/-1 > :: indent all inside curly braces
+:g/{/sil .+1,/}/-1 > :: same as above, except this doesn't return messages
+
+:!ctags -R :: invoke ctags from vim
+<c-]> :: go to function definition
+<c-t> :: return to the previuos file
+g<C-]> command presents us with a list of choices from the tag match list
+:tselect command to retrospectively pull up the menu of the tag match list
+
+<C-]> Jump to the first tag that matches the word under the cursor
+g<C-]> Prompt user to select from multiple matches for the word under the cursor. If only one match exists, jump to it without prompting.
+:tag {keyword} Jump to the first tag that matches {keyword}
+:tjump {keyword} Prompt user to select from multiple matches for {keyword} . If only one match exists, jump to it without prompting.
+:pop or <C-t> Reverse through tag history
+:tag Advance through tag history
+:tnext Jump to next matching tag
+:tprev Jump to previous matching tag
+:tfirst Jump to first matching tag
+:tlast Jump to last matching tag
+:tselect Prompt user to choose an item from the tag match list
+
+:clist :: open the quicklist
+:cnext :: open next match
+:grep {word} {location} :: search the word inside the location
+
+<C-n> Generic keywords
+<C-x><C-n> Current buffer keywords
+<C-x><C-i> Included file keywords
+<C-x><C-]> tags file keywords
+<C-x><C-k> Dictionary lookup
+<C-x><C-l> Whole line completion
+<C-x><C-f> Filename completion
+<C-x><C-o> Omni-completion
+
+## spell checker
+]s Jump to next spelling error
+[s Jump to previous spelling error
+z= Suggest corrections for current word
+zg Add current word to spell file
+zw Remove current word from spell file
+zug Revert zg or zw command for current word
