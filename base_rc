@@ -101,4 +101,7 @@ noremap <Leader>f :Explore<CR>
 " avoid Esc key
 imap jj <Esc>
 
+" Preserve undo history
+set undodir=~/.vim/undo
+set undofile
 
