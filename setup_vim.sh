@@ -19,6 +19,18 @@ printf "Plugin 'tpope/vim-fugitive'\n" >> ~/.vimrc
 # install colorscheme
 printf "Plugin 'morhetz/gruvbox'\n" >> ~/.vimrc
 
+# install SimplyFold
+printf "Plugin 'tmhedberg/SimpylFold'\n" >> ~/.vimrc
+
+# install syntastic
+printf "Plugin 'vim-syntastic/syntastic'\n" >> ~/.vimrc
+
+# install syntastic
+printf "Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}'\n" >> ~/.vimrc
+
+# install nerdtree
+printf "Plugin 'scrooloose/nerdtree'\n" >> ~/.vimrc
+
 printf "call vundle#end()\n" >> ~/.vimrc
 vim +PluginInstall +qall
 

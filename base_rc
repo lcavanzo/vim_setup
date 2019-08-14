@@ -3,6 +3,7 @@ set nocompatible
 filetype plugin indent on
 set tabstop=4
 set shiftwidth=4
+set softtabstop=4
 set expandtab
 set autoindent
 set smartindent
@@ -10,6 +11,7 @@ set clipboard=unnamedplus
 set history=1000
 set incsearch
 set hidden 
+set fileformat=unix
 
 " Abbreviations
 abbr _sh #!/bin/bash
@@ -88,6 +90,13 @@ set nowrap
 set fo-=t
 highlight ColorColumn ctermfg=133
 
+" Enable folding
+set foldmethod=indent
+set foldlevel=99
+
+" Enable folding with the spacebar
+nnoremap <space> za
+
 filetype off
 syntax enable
 
@@ -104,4 +113,11 @@ imap jj <Esc>
 " Preserve undo history
 set undodir=~/.vim/undo
 set undofile
+
+" toggle nerdTree
+map <C-n> :NERDTreeToggle<CR>
+
+" powerline config
+set laststatus=2
+set t_Co=256
 
