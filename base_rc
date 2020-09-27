@@ -1,3 +1,4 @@
+" Vim is better
 set nocompatible
 
 filetype plugin indent on
@@ -8,25 +9,31 @@ set expandtab
 set autoindent
 set smartindent
 set clipboard=unnamedplus
-set history=1000
+set history=10000
 set incsearch
 set hidden 
 set fileformat=unix
+set textwidth=79
+set nowrap
+highlight ColorColumn ctermfg=133
+
+" Syntax highlighting
+syntax on
 
 " Abbreviations
 abbr _sh #!/bin/bash
 abbr _py #!/usr/sbin/python3
 
-"tab formatting
+" tab formatting
 set list
 
-"set listchars=tab:\|\<Space>
-set listchars=tab:>-,space:.,eol:$     " > is shown at the beginning, - throughout
+" set listchars=tab:\|\<Space>
+set listchars=tab:>-,space:.,eol:$ " > is shown at the beginning, - throughout
 
 " Set <Leader> key
 let mapleader=","
 
-" refresh ctags (this need ctags packet installed)
+" refresh ctags (this need ctags packet installed) 
 nnoremap <f5> :!ctags -R<CR>
 
 " check spell 
@@ -35,6 +42,9 @@ nnoremap <f6> :set spell<CR>
 " Quick save command
 " noremap <C-s> :update<CR>
 noremap <Leader>s :write<CR>
+
+" Quick refresh the currenlty file
+noremap <Leader>e :edit<CR>
 
 " Quick quit command
 noremap <Leader>q :quit<CR> " Quit current window
@@ -54,10 +64,10 @@ noremap <Leader>n :bprevious<CR>
 noremap <Leader>x :bdelete<CR>
 
 " Vim tabs
-noremap <Leader>t :tabnew<CR>
+noremap <Leader>y :tabnew<CR>
 noremap <Leader>c :tabclose<CR>
 noremap <Leader>r :tabnext<CR>
-noremap <Leader>e :tabprevious<CR>
+noremap <Leader>t :tabprevious<CR>
 
 " Mute Highlighting
 noremap <Leader>l :<c-u>nohlsearch<CR>
@@ -77,18 +87,14 @@ map <c-UP> <c-w>-
 map <c-LEFT> <c-w><
 map <c-RIGHT> <c-w>>
 
-" Autocomplete
-
 "toggle listchar display
  noremap <leader>d :set invlist<CR>
 
-" Show line numbers and length
+" Show ruler line at bottom of each buffer
 set ruler
+
+" Show line numbers
 set number
-set textwidth=79
-set nowrap
-set fo-=t
-highlight ColorColumn ctermfg=133
 
 " Enable folding
 set foldmethod=indent
@@ -100,6 +106,7 @@ nnoremap <space> za
 filetype off
 syntax enable
 
+" no temp or backup files
 set nobackup
 set nowritebackup
 set noswapfile
@@ -120,4 +127,12 @@ map <C-n> :NERDTreeToggle<CR>
 " powerline config
 set laststatus=2
 set t_Co=256
+
+" PEP8
+let g:syntastic_python_checkers = ['python3']
+augroup vimrc_autocmds
+  autocmd BufEnter *.py highlight OverLength ctermbg=darkgrey guibg=#592929
+  autocmd BufEnter *.py match OverLength /\%74v.*/
+  autocmd BufEnter *.py set nowrap
+augroup END
 

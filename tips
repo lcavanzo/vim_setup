@@ -1,6 +1,6 @@
 <C-r> :: redo
 zz :: redraw the screen with the current line in the middle of the window
-<C-o> :: insert normal mode
+<C-o> :: insert normal mode:: when you are in insert mode you can only execute one command in this mode. After executing a normal mode command, you're back to insert mode.
 <C-v> + {code} :: insert characters using it's character code i.e 065 == A
 <C-v>u{code} :: for unicode i.e <C-v>u00bf == ¿
 ga == obtain character's info
@@ -364,3 +364,10 @@ z= Suggest corrections for current word
 zg Add current word to spell file
 zw Remove current word from spell file
 zug Revert zg or zw command for current word
+
+
+
+    zt scrolls to the top
+    zz scrolls to the middle
+    zb scrolls to the bottom
+
